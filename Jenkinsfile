@@ -5,6 +5,7 @@ pipeline {
         jdk 'Java21'
         maven 'Maven'
     }
+
     stages {
         stage('Workspace Cleanup'){
             steps{
@@ -14,9 +15,21 @@ pipeline {
 
         stage('Checkout from SCM'){
             steps{
-                git branch: 'main', credentialsId: 'github', url: 
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Shubhamsoni024/register-app.git'
             }
         }
-    }
 
+        stage('Build Application'){
+            steps{
+                sh "mvn clean package"
+            }
+        }
+
+        stage('Test Application'){
+            steps{
+                sh "mvn test"
+            }
+        }
+
+    }
 }
