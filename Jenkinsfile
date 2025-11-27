@@ -30,6 +30,12 @@ pipeline {
                 sh "mvn test"
             }
         }
+        
+        stage('SonarQube Analysis'){
+            steps{
+                sh "mvn sonar:sonar"
+            }
+        }
 
     }
 }
